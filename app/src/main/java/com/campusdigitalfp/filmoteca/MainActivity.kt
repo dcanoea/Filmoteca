@@ -1,6 +1,6 @@
 package com.campusdigitalfp.filmoteca
 
-import AboutScreen
+import com.campusdigitalfp.filmoteca.screens.AboutScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent

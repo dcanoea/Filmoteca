@@ -1,3 +1,5 @@
+package com.campusdigitalfp.filmoteca.screens
+
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
