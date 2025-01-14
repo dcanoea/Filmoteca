@@ -33,7 +33,6 @@ fun FilmEditScreen(navController: NavHostController) {
                     Text(stringResource(R.string.guardar))
                 }
             }
-
             Row{
                 Button(onClick = { navController.popBackStack() }) {
                     Text(stringResource(R.string.cancelar))

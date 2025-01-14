@@ -26,13 +26,14 @@ fun FilmListScreen(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center){
             Row {
-                Button(onClick = { navController.navigate("FilmDataScreen") }) {
+                Button(onClick = { navController.navigate("FilmDataScreen/Película A") }) {
                     Text(stringResource(R.string.ver_pel_cula_a))
                 }
+
             }
 
             Row{
-                Button(onClick = { navController.navigate("FilmDataScreen") }) {
+                Button(onClick = { navController.navigate("FilmDataScreen/PeliculaB") }) {
                     Text(stringResource(R.string.ver_pel_cula_b))
                 }
             }

@@ -17,7 +17,7 @@ import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 
 @Composable
-fun FilmDataScreen(navController: NavHostController) {
+fun FilmDataScreen(navController: NavHostController, nombrePelicula : String) {
     FilmotecaTheme {
         Column(
             modifier = Modifier
@@ -26,10 +26,10 @@ fun FilmDataScreen(navController: NavHostController) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center){
             Row {
-                Text(stringResource(R.string.datos_de_la_pel_cula))
+                Text(text = "Película: $nombrePelicula")
             }
             Row {
-                Button(onClick = { navController.navigate("FilmDataScreen")}) {
+                Button(onClick = { navController.navigate("FilmDataScreen/Película relacionada")}) {
                     Text(stringResource(R.string.ver_pel_cula_relacionada))
                 }
             }
