@@ -7,4 +7,14 @@
     <string name="obtener_soporte">Obtener soporte</string>
     <string name="volver">Volver</string>
     <string name="incidencia_con_filmoteca">Incidencia con filmoteca</string>
+    <string name="datos_de_la_pel_cula">Datos de la película</string>
+    <string name="ver_pel_cula_a">Ver película A</string>
+    <string name="ver_pel_cula_b">Ver película B</string>
+    <string name="acerca_de">Acerca de</string>
+    <string name="ver_pel_cula_relacionada">Ver película Relacionada</string>
+    <string name="editar_pel_cula">Editar película</string>
+    <string name="volver_a_la_principal">Volver a la principal</string>
+    <string name="editando_pel_clula">Editando pelíclula</string>
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>

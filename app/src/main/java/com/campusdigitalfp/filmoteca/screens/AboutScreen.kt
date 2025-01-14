@@ -16,6 +16,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 
@@ -27,7 +28,7 @@ fun abrirPaginaWeb(url: String, context: Context) {
 }
 
 @Composable
-fun AboutScreen() {
+fun AboutScreen(navController: NavHostController) {
     val context = LocalContext.current // Contexto necesario para el Toast
 
     fun showToast(message: String) {
@@ -45,9 +46,6 @@ fun AboutScreen() {
         val packageManager = context.packageManager
         if (intent.resolveActivity(packageManager) != null) {
             context.startActivity(intent)  // Inicia la actividad para enviar el correo
-        } else {
-            // En caso de que no haya ninguna aplicación de correo instalada
-            println("No hay una aplicación de correo instalada que maneje este Intent.")
         }
     }
     FilmotecaTheme {
@@ -81,7 +79,7 @@ fun AboutScreen() {
                     mandarEmail(
                         context = context,
                         email = "eagullof@campusdigitalfp.es",
-                        asunto = context.getString(R.string.incidencia_con_filmoteca)  // Asegúrate de que este recurso exista
+                        asunto = context.getString(R.string.incidencia_con_filmoteca)
                     )
                 }) {
                     Text(text = stringResource(R.string.obtener_soporte))

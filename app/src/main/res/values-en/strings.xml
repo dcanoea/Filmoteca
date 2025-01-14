@@ -6,5 +6,15 @@
     <string name="ir_al_sitio_web">Go to website</string>
     <string name="obtener_soporte">Get support</string>
     <string name="volver">Back</string>
-    <string name="incidencia_con_filmoteca">Problem with Film Library</string>
+    <string name="incidencia_con_filmoteca">Incidence with Film Library</string>
+    <string name="datos_de_la_pel_cula">Film Data</string>
+    <string name="ver_pel_cula_a">Watch Film A</string>
+    <string name="ver_pel_cula_b">Watch Film B</string>
+    <string name="acerca_de">About</string>
+    <string name="ver_pel_cula_relacionada">See related film</string>
+    <string name="editar_pel_cula">Edit film</string>
+    <string name="volver_a_la_principal">Back to main page</string>
+    <string name="editando_pel_clula">Editing film</string>
+    <string name="guardar">Save</string>
+    <string name="cancelar">Cancel</string>
 </resources>
