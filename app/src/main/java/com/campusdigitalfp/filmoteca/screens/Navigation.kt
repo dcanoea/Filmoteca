@@ -12,8 +12,10 @@ fun Navigation() {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "FilmListScreen") {
-        // Ruta de AboutScreen
         composable("AboutScreen") { AboutScreen(navController) }
+        composable("FilmEditScreen") { FilmEditScreen(navController) }
+        composable("FilmListScreen") { FilmListScreen(navController) }
+
 
         // Ruta de FilmDataScreen con parámetro nombrePelicula
         composable(
@@ -28,10 +30,5 @@ fun Navigation() {
             }
         }
 
-        // Ruta para FilmEditScreen
-        composable("FilmEditScreen") { FilmEditScreen(navController) }
-
-        // Ruta para FilmListScreen
-        composable("FilmListScreen") { FilmListScreen(navController) }
     }
 }

@@ -29,7 +29,6 @@ fun FilmListScreen(navController: NavHostController) {
                 Button(onClick = { navController.navigate("FilmDataScreen/Película A") }) {
                     Text(stringResource(R.string.ver_pel_cula_a))
                 }
-
             }
 
             Row{
