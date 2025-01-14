@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Filmoteca</string>
+    <string name="creada_por_david_cano_escario">Creada por David Cano Escario</string>
+    <string name="funci_n_no_implementada">Función no implementada</string>
+    <string name="imagen_de_perfil">Imagen de perfil</string>
+    <string name="ir_al_sitio_web">Ir al sitio web</string>
+    <string name="obtener_soporte">Obtener soporte</string>
+    <string name="volver">Volver</string>
 </resources>

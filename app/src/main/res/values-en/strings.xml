@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Film Library</string>
+    <string name="creada_por_david_cano_escario">Created by David Cano Escario</string>
+    <string name="funci_n_no_implementada">Function not implemented</string>
+    <string name="imagen_de_perfil">Profile picture</string>
+    <string name="ir_al_sitio_web">Go to website</string>
+    <string name="obtener_soporte">Get support</string>
+    <string name="volver">Back</string>
+</resources>

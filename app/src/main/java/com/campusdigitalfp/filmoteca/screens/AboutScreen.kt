@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 
@@ -21,7 +22,6 @@ fun AboutScreen() {
     fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
-    // Aplicamos FilmotecaTheme aquí para envolver la UI
     FilmotecaTheme {
         Column(
             modifier = Modifier
@@ -30,38 +30,37 @@ fun AboutScreen() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "Creada por David Cano Escario")
+            Text(text = stringResource(R.string.creada_por_david_cano_escario))
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Image(
                 painter = painterResource(id = R.drawable.perfil),
-                contentDescription = "Imagen de perfil",
+                contentDescription = stringResource(R.string.imagen_de_perfil),
                 modifier = Modifier.size(100.dp)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Row(modifier = Modifier.padding(all = 8.dp)) {
-                Button(onClick = {
-                   showToast("Función no implementada")
+                Button(modifier = Modifier.weight(1f),onClick = {
+                   showToast(context.getString(R.string.funci_n_no_implementada))
                 }) {
-                    Text(text = "Ir al sitio web")
+                    Text(text = stringResource(R.string.ir_al_sitio_web))
                 }
                 Spacer(modifier = Modifier.width(8.dp))
-                Button(onClick = {
-                    showToast("Función no implementada")
+                Button(modifier = Modifier.weight(1f),onClick = {
+                    showToast(context.getString(R.string.funci_n_no_implementada))
                 }) {
-                    Text(text = "Obtener soporte")
+                    Text(text = stringResource(R.string.obtener_soporte))
                 }
             } // fin fila
 
             Button(onClick = {
-                showToast("Función no implementada")
+                showToast(context.getString(R.string.funci_n_no_implementada))
             }) {
-                Text(text = "Volver")
+                Text(text = stringResource(R.string.volver))
             }
         } // fin columna
     }
 }
-
