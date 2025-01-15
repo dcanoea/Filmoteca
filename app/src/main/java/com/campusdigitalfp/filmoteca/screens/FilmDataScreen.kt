@@ -59,7 +59,7 @@ fun FilmDataScreen(navController: NavHostController, nombrePelicula : String) {
                     .padding(top = 120.dp)) {
                     Image(
                         painter = painterResource(id = R.drawable.cartel),
-                        contentDescription = stringResource(R.string.imagen_de_perfil),
+                        contentDescription = stringResource(R.string.cartel),
                         modifier = Modifier.size(150.dp)
                     )
 

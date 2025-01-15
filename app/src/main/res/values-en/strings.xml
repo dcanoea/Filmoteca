@@ -25,4 +25,5 @@
     <string name="numa_o">numAño</string>
     <string name="genero">Genero</string>
     <string name="formato">Formato</string>
+    <string name="cartel">cartel</string>
 </resources>

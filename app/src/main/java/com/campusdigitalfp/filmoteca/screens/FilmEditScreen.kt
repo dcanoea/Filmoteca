@@ -1,11 +1,15 @@
 package com.campusdigitalfp.filmoteca.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
@@ -22,7 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
@@ -60,15 +66,29 @@ fun FilmEditScreen(navController: NavHostController) {
                     .fillMaxSize()
                     .padding(16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.Top
             ) {
-                Row {
-                    Text(stringResource(R.string.editando_pel_clula))
+                Row (modifier = Modifier.padding(top = 120.dp).fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly){
+                    Image(
+                        painter = painterResource(id = R.drawable.cartel),
+                        contentDescription = stringResource(R.string.cartel),
+                        modifier = Modifier.size(100.dp)
+                    )
+                    Button(modifier = Modifier.weight(1f).padding(end = 8.dp), onClick = {}) {
+                        Text("Capturar fotografía")
+
+                    }
+                    Button(modifier = Modifier.weight(1f), onClick = {}) {
+                        Text("Seleccionar imagen")
+                    }
                 }
 
-                // Botón "Guardar" que devuelve RESULT_OK
-                Row {
-                    Button(onClick = {
+
+                Row (modifier = Modifier.fillMaxWidth()){
+                    // Botón "Guardar" que devuelve RESULT_OK
+                    Button(modifier = Modifier.fillMaxWidth().weight(1f), onClick = {
                         navController.previousBackStackEntry?.savedStateHandle?.set(
                             "resultado",
                             "Película editada con éxito"
@@ -77,11 +97,9 @@ fun FilmEditScreen(navController: NavHostController) {
                     }) {
                         Text(stringResource(R.string.guardar))
                     }
-                }
 
-                // Botón "Cancelar" que devuelve RESULT_CANCELED
-                Row {
-                    Button(onClick = {
+                    // Botón "Cancelar" que devuelve RESULT_CANCELED
+                    Button(modifier = Modifier.fillMaxWidth().weight(1f), onClick = {
                         navController.previousBackStackEntry?.savedStateHandle?.set(
                             "resultado",
                             "Edición cancelada"
@@ -95,4 +113,12 @@ fun FilmEditScreen(navController: NavHostController) {
         }
     }
 }
-
+@Preview
+@Composable
+fun FilmEditScreenPreview(){
+    FilmotecaTheme {
+        FilmEditScreen(
+            navController = NavHostController(LocalContext.current)
+        )
+    }
+}
