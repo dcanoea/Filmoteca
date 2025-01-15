@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -48,7 +49,7 @@ fun FilmEditScreen(navController: NavHostController) {
                         navController.previousBackStackEntry?.savedStateHandle?.set("resultado", "Edición Cancelada")
                         navController.popBackStack() // Navegar hacia atrás
                     }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Atrás")
+                        Icon(imageVector = Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Atrás")
                     }
                 }
             )
