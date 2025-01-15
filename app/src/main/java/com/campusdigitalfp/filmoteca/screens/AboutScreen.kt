@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
@@ -34,9 +33,6 @@ fun abrirPaginaWeb(url: String, context: Context) {
 fun AboutScreen(navController: NavHostController) {
     val context = LocalContext.current // Contexto necesario para el Toast
 
-    fun showToast(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-    }
 
     @SuppressLint("QueryPermissionsNeeded")
     fun mandarEmail(context: Context, email: String, asunto: String) {

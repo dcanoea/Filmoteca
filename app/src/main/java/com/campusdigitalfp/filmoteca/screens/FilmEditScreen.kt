@@ -25,36 +25,32 @@ import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun FilmEditScreen(navController: NavHostController) {
-    val context = LocalContext.current
-
-    var imagen by remember { mutableIntStateOf(1) }
-    var expandedFormato by remember { mutableStateOf(false) }
-    var formato by remember { mutableIntStateOf(1) }
 
     FilmotecaTheme {
-        Scaffold(topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-                title = { Text("Filmoteca") },
-                navigationIcon = {
-                    IconButton(onClick = {
-                        navController.previousBackStackEntry?.savedStateHandle?.set(
-                            "resultado",
-                            "Edición Cancelada"
-                        )
-                        navController.popBackStack()
-                    }) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Atrás"
-                        )
+        Scaffold(
+            topBar = {
+                TopAppBar(
+                    colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.primary,
+                    ),
+                    title = { Text("Filmoteca") },
+                    navigationIcon = {
+                        IconButton(onClick = {
+                            navController.previousBackStackEntry?.savedStateHandle?.set(
+                                "resultado",
+                                "Edición Cancelada"
+                            )
+                            navController.popBackStack()
+                        }) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                contentDescription = "Atrás"
+                            )
+                        }
                     }
-                }
-            )
-        }) {
+                )
+            }) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -137,42 +133,71 @@ fun FilmEditScreen(navController: NavHostController) {
                     singleLine = true
                 )
 
-
-
-
-
-
-
                 val context = LocalContext.current
 
 
                 // DropdownMenu Género
-                var expandedGenero by remember { mutableStateOf(false) }
+                var expanded by remember { mutableStateOf(false) }
                 val generoList = context.resources.getStringArray(R.array.genero_list).toList()
-                var genero by remember { mutableIntStateOf(0) }
-                val optionsGenero = listOf("Acción", "Drama", "Comedia", "Terror", "Sci-Fi")
+                var selectedOption by remember { mutableStateOf(generoList[0]) }
 
+                Column {
+                    Text(selectedOption, modifier = Modifier
+                        .padding(16.dp)
+                        .clickable { expanded = true }
+                    )
 
+                    DropdownMenu(
+                        expanded = expanded,
+                        onDismissRequest = { expanded = false }
+                    ) {
+       /*
+                        generoList.forEach { option ->
+                            DropdownMenuItem(
+                                onClick = {
+                                selectedOption = option
+                                expanded = false
+                            }) {
+                                Text = (option)
+                            }
+                        }
+        */
+                    }
+                }
 
-
-
-
+                Spacer(modifier = Modifier.height(16.dp))
 
 
 
                 // DropdownMenu Formato
-                var expandedFormato by remember { mutableStateOf(false) }
+                var expanded2 by remember { mutableStateOf(false) }
                 val formatoList = context.resources.getStringArray(R.array.formato_list).toList()
-                var formato by remember { mutableIntStateOf(1) }
+                var selectedOption2 by remember { mutableStateOf(formatoList[0]) }
+                Column {
+                    Text(selectedOption2, modifier = Modifier
+                        .padding(16.dp)
+                        .clickable { expanded2 = true }
+                    )
 
+                    DropdownMenu(
+                        expanded = expanded2,
+                        onDismissRequest = { expanded2 = false }
+                    ) {
+                        /*
+                                         formatoList.forEach { option2 ->
+                                             DropdownMenuItem(
+                                                 onClick = {
+                                                 selectedOption2 = option2
+                                                 expanded2 = false
+                                             }) {
+                                                 Text = (option2)
+                                             }
+                                         }
+                         */
+                    }
+                }
 
-
-
-
-
-
-
-
+                Spacer(modifier = Modifier.height(16.dp))
 
                 //Textfield comentarios
                 var comentarios by remember { mutableStateOf("") }
