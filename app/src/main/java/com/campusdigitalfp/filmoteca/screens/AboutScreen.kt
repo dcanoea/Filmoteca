@@ -87,12 +87,10 @@ fun AboutScreen(navController: NavHostController) {
             } // fin fila
 
             Button(onClick = {
-                showToast(context.getString(R.string.funci_n_no_implementada))
+                navController.popBackStack()
             }) {
                 Text(text = stringResource(R.string.volver))
             }
         } // fin columna
     }
-
-
 }

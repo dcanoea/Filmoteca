@@ -6,8 +6,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -18,6 +24,8 @@ import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 
 @Composable
 fun FilmDataScreen(navController: NavHostController, nombrePelicula : String) {
+    var resultadoEditado by remember { mutableStateOf<String?>(null) }
+
     FilmotecaTheme {
         Column(
             modifier = Modifier
@@ -28,6 +36,12 @@ fun FilmDataScreen(navController: NavHostController, nombrePelicula : String) {
             Row {
                 Text(text = "Película: $nombrePelicula")
             }
+
+            // Mostrar resultado si la película fue editada o no
+            resultadoEditado?.let {
+                Text(text = it, style = MaterialTheme.typography.bodyLarge)
+            }
+
             Row {
                 Button(onClick = { navController.navigate("FilmDataScreen/Película relacionada")}) {
                     Text(stringResource(R.string.ver_pel_cula_relacionada))
@@ -47,6 +61,12 @@ fun FilmDataScreen(navController: NavHostController, nombrePelicula : String) {
                     Text(text = stringResource(R.string.volver_a_la_principal))
                 }
             }
+        }
+    }
+    // Lógica para manejar el resultado de FilmEditScreen
+    LaunchedEffect(Unit) {
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("resultado")?.observeForever {
+            resultadoEditado = it
         }
     }
 }
