@@ -17,4 +17,12 @@
     <string name="editando_pel_clula">Editando pelíclula</string>
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
+    <string name="editar">Editar</string>
+    <string name="ver_en_imdb">Ver en IMDB</string>
+    <string name="director">Director</string>
+    <string name="nombredirector">NombreDirector</string>
+    <string name="a_o">Año:</string>
+    <string name="numa_o">numAño</string>
+    <string name="genero">Genero</string>
+    <string name="formato">Formato</string>
 </resources>
