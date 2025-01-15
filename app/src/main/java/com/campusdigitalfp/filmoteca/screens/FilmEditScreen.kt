@@ -12,9 +12,11 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -34,7 +36,11 @@ fun FilmEditScreen(navController: NavHostController) {
 
     FilmotecaTheme {
         Scaffold(topBar = {
-            TopAppBar(
+            TopAppBar(// Definimos los colores personalizados para la TopAppBar
+                colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer, // Color de fondo de la barra
+                    titleContentColor = MaterialTheme.colorScheme.primary, // Color del título
+                ),
                 title = { Text("Filmoteca") },
                 navigationIcon = {
                     IconButton(onClick = {
