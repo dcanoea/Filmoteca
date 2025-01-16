@@ -64,7 +64,7 @@ fun BarraSuperiorComun(navController: NavHostController, atras: Boolean = true) 
                     onDismissRequest = { expanded = false }
                 ) {
                     DropdownMenuItem(
-                        onClick = { addDefaultFilm() },
+                        onClick = { anyadirPeliculaDefecto() },
                         leadingIcon = {
                             Icon(
                                 imageVector = Icons.Filled.Add,
@@ -168,17 +168,17 @@ object FilmDataSource {
     }
 }
 
-fun addDefaultFilm() {
+fun anyadirPeliculaDefecto() {
     val newFilm = Film(
         id = FilmDataSource.films.size,
         title = "Nueva Película",
-        director = "Director Desconocido",
+        director = "Director por defecto",
         imageResId = R.drawable.cartel,
         comments = "Comentario por defecto",
         format = Film.FORMAT_DVD,
         genre = Film.GENRE_ACTION,
         imdbUrl = "http://www.imdb.com",
-        year = 2023
+        year = 2025
     )
     FilmDataSource.films.add(newFilm)
 }
