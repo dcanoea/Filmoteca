@@ -2,6 +2,12 @@ package com.campusdigitalfp.filmoteca.common
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -10,6 +16,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 
@@ -17,6 +29,8 @@ import com.campusdigitalfp.filmoteca.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BarraSuperiorComun(navController: NavHostController, atras: Boolean = true) {
+    var expanded by remember { mutableStateOf(false) }
+
     TopAppBar(
         // Definimos los colores personalizados para la TopAppBar
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
@@ -35,7 +49,46 @@ fun BarraSuperiorComun(navController: NavHostController, atras: Boolean = true) 
                     )
                 }
             }
+        },
+        actions = {
+            if (!atras) {
+                IconButton(onClick = { expanded = true }) {
+                    Icon(
+                        imageVector = Icons.Filled.Menu,
+                        contentDescription = "Menu de opciones"
+                    )
+                }
+
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false }
+                ) {
+                    DropdownMenuItem(
+                        onClick = { addDefaultFilm() },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Filled.Add,
+                                contentDescription = "Añadir Pelicula",
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        text = { Text("Nuevo") }
+                    )
+                    DropdownMenuItem(
+                        onClick = { navController.navigate("AboutScreen") },
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Filled.Info,
+                                contentDescription = stringResource(R.string.acerca_de),
+                                tint = MaterialTheme.colorScheme.primary
+                            )
+                        },
+                        text = { Text(stringResource(R.string.acerca_de)) }
+                    )
+                }
+            }
         }
+
     )
 }
 
@@ -69,7 +122,7 @@ data class Film(
 }
 
 object FilmDataSource {
-    val films: MutableList<Film> = mutableListOf()
+    val films: MutableList<Film> = mutableStateListOf()
 
     init {
         // Primera película: Harry Potter y la piedra filosofal
@@ -113,6 +166,21 @@ object FilmDataSource {
 
         // Añade más películas si deseas!
     }
+}
+
+fun addDefaultFilm() {
+    val newFilm = Film(
+        id = FilmDataSource.films.size,
+        title = "Nueva Película",
+        director = "Director Desconocido",
+        imageResId = R.drawable.cartel,
+        comments = "Comentario por defecto",
+        format = Film.FORMAT_DVD,
+        genre = Film.GENRE_ACTION,
+        imdbUrl = "http://www.imdb.com",
+        year = 2023
+    )
+    FilmDataSource.films.add(newFilm)
 }
 
 
