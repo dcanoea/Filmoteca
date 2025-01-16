@@ -1,22 +1,19 @@
 package com.campusdigitalfp.filmoteca.screens
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.campusdigitalfp.filmoteca.R
 import com.campusdigitalfp.filmoteca.common.BarraSuperiorComun
+import com.campusdigitalfp.filmoteca.common.Film
+import com.campusdigitalfp.filmoteca.common.FilmDataSource
 import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -29,14 +26,15 @@ fun FilmListScreen(navController: NavHostController) {
                 atras = false
             )
         }) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Row {
+            Column (modifier = Modifier.padding(top = 120.dp)) {
+                val films = FilmDataSource.films
+                FilmList(films)
+
+            }
+
+
+
+                /*Row {
                     Button(onClick = { navController.navigate("FilmDataScreen/Película A") }) {
                         Text(stringResource(R.string.ver_pel_cula_a))
                     }
@@ -52,8 +50,20 @@ fun FilmListScreen(navController: NavHostController) {
                     Button(onClick = { navController.navigate("AboutScreen") }) {
                         Text(stringResource(R.string.acerca_de))
                     }
-                }
+                }*/
             }
         }
     }
+
+@Composable
+fun FilmList(films: List<Film>) {
+    LazyColumn (modifier = Modifier.padding(horizontal = 20.dp)) {
+        items(films) { film ->
+            Text(
+                text = film.title.toString(),
+                maxLines = 1
+            )
+        }
+    }
 }
+
