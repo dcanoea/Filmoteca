@@ -1,14 +1,13 @@
 package com.campusdigitalfp.filmoteca.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.content.MediaType.Companion.Image
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -16,16 +15,17 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
@@ -38,60 +38,73 @@ import com.campusdigitalfp.filmoteca.ui.theme.FilmotecaTheme
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun FilmListScreen(navController: NavHostController) {
+
+    val isActionMode = remember { mutableStateOf(false) }
+    val selectedFilms = remember { mutableStateListOf<Film>() }
+
     FilmotecaTheme {
         Scaffold(topBar = {
             BarraSuperiorComun(
                 navController = navController,
-                atras = false
+                atras = false,
+                isActionMode,
+                selectedFilms
             )
         }) {
-            Column (modifier = Modifier.padding(top = 120.dp)) {
+            Column(modifier = Modifier.padding(top = 120.dp)) {
                 val films = FilmDataSource.films
-                FilmList(films)
-
+                FilmList(films, navController, isActionMode, selectedFilms)
             }
-
-
-
-                /*Row {
-                    Button(onClick = { navController.navigate("FilmDataScreen/Película A") }) {
-                        Text(stringResource(R.string.ver_pel_cula_a))
-                    }
-                }
-
-                Row {
-                    Button(onClick = { navController.navigate("FilmDataScreen/PeliculaB") }) {
-                        Text(stringResource(R.string.ver_pel_cula_b))
-                    }
-                }
-
-                Row {
-                    Button(onClick = { navController.navigate("AboutScreen") }) {
-                        Text(stringResource(R.string.acerca_de))
-                    }
-                }*/
-            }
-        }
-    }
-
-@Composable
-fun FilmList(films: List<Film>) {
-    LazyColumn {
-        items(films) { film ->
-            FilmItem(film)
         }
     }
 }
 
 @Composable
-fun FilmItem(film: Film) {
+fun FilmList(
+    films: List<Film>,
+    navController: NavHostController,
+    isActionMode: MutableState<Boolean>,
+    selectedFilms: MutableList<Film>
+) {
+    LazyColumn {
+        items(films) { film ->
+            FilmItem(film, onClick = {
+                if (isActionMode.value) {
+                    // Seleccionar/deseleccionar habito
+                    if (selectedFilms.contains(film)) {
+                        selectedFilms.remove(film)
+                        if (selectedFilms.isEmpty()) {
+                            isActionMode.value = false // Desactiva action mode
+                        }
+                    } else {
+                        selectedFilms.add(film)
+                    }
+                } else {
+                    navController.navigate("FilmListScreen")
+                }
+            }, onLongClick = {
+                isActionMode.value = true
+                selectedFilms.add(film) // Agregar a la selección
+            },
+                isSelected = selectedFilms.contains(film)
+            )
+        }
+        }
+    }
+
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun FilmItem(film: Film, onClick: () -> Unit, onLongClick: () -> Unit, isSelected: Boolean) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .combinedClickable(onClick = onClick, onLongClick = onLongClick)
     ) {
         Image(
-            painter = painterResource(id = film.imageResId),
+            painter = painterResource(if (isSelected) R.drawable.comprobado
+                                        else R.drawable.cartel),
             contentDescription = film.title,
             modifier = Modifier
                 .size(80.dp)

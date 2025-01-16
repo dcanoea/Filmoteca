@@ -51,7 +51,7 @@ fun AboutScreen(navController: NavHostController) {
         Scaffold(topBar = {
             BarraSuperiorComun(
                 navController = navController,
-                atras = true
+                atras = true,
             )
         }) {
             Column(

@@ -1,9 +1,13 @@
 package com.campusdigitalfp.filmoteca.common
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.DropdownMenu
@@ -16,19 +20,28 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.campusdigitalfp.filmoteca.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BarraSuperiorComun(navController: NavHostController, atras: Boolean = true) {
+fun BarraSuperiorComun(
+    navController: NavHostController,
+    atras: Boolean = true,
+    isActionMode: MutableState<Boolean> = remember { mutableStateOf(false) },
+    selectedFilms: MutableList<Film> = remember { mutableStateListOf() }
+) {
+
     var expanded by remember { mutableStateOf(false) }
 
     TopAppBar(
@@ -41,13 +54,20 @@ fun BarraSuperiorComun(navController: NavHostController, atras: Boolean = true) 
             Text(text = "Filmoteca")
         },
         navigationIcon = {
-            if (atras) {
-                IconButton(onClick = { navController.popBackStack() }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Atrás"
-                    )
-                }
+            Box(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .clickable {
+                        navController.navigate("FilmListScreen") {
+                            popUpTo("FilmListScreen") { inclusive = true }
+                        }
+                    }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Home, // Icono HOME
+                    contentDescription = "Home",
+                    modifier = Modifier.size(24.dp)
+                )
             }
         },
         actions = {
@@ -86,6 +106,25 @@ fun BarraSuperiorComun(navController: NavHostController, atras: Boolean = true) 
                         text = { Text(stringResource(R.string.acerca_de)) }
                     )
                 }
+            }
+            // Agregar opción de eliminar si está en modo de acción
+            if (isActionMode.value) {
+                DropdownMenuItem(
+                    onClick = {
+                        // Acción para eliminar elementos seleccionados
+                        FilmDataSource.films.removeAll(selectedFilms)
+                        selectedFilms.clear()
+                        isActionMode.value = false
+                    },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Filled.Delete,
+                            contentDescription = "Eliminar seleccionados",
+                            tint = MaterialTheme.colorScheme.primary
+                        )
+                    },
+                    text = { Text("Eliminar seleccionados") }
+                )
             }
         }
 
